@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="@string/app_title"
+        android:textSize="40dp"
+        android:textColor="@color/icons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:gravity="center_horizontal|center"
+        android:padding="20dp"
+        tools:ignore="SpUsage" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1.0"
+        android:gravity="center_horizontal|center"
+        tools:ignore="DisableBaselineAlignment">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="0dip"
+            android:layout_weight=".5"
+            tools:ignore="UselessParent">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:background="@color/background"
+                android:textColor="@color/secondary_text"
+                android:text="Player 1"
+                android:ems="10"
+                android:id="@+id/editText"
+                android:layout_weight=".5"
+                android:layout_marginBottom="10dp"
+                tools:ignore="HardcodedText,LabelFor,NestedWeights" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:background="@color/background"
+                android:textColor="@color/secondary_text"
+                android:text="Player 2"
+                android:ems="10"
+                android:id="@+id/editText2"
+                android:layout_weight=".5"
+                android:layout_marginBottom="10dp"
+                tools:ignore="HardcodedText,LabelFor" />
+
+            <Switch
+                android:text="Computer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/switch1"
+                android:layout_weight=".5"
+                android:layout_marginBottom="10dp"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:text="Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button5"
+                android:layout_weight=".5"
+                android:layout_marginBottom="10dp"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

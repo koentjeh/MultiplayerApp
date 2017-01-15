@@ -1,6 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <TextView
+        android:text="Score X = 0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:id="@+id/textViewScoreX"
+        android:textStyle="normal|bold"
+        android:textSize="36sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Score O = 0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:id="@+id/textViewScoreO"
+        android:textStyle="normal|bold"
+        android:textSize="36sp"
+        android:layout_below="@+id/textViewScoreX"
+        android:layout_alignEnd="@+id/textViewScoreX" />
+
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/button1"
+        android:background="@android:color/holo_blue_light"
+        android:layout_marginRight="15dp"
+        android:layout_above="@+id/button4"
+        android:layout_alignStart="@+id/button4"
+        android:layout_marginBottom="15dp" />
+
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/button2"
+        android:background="@android:color/holo_blue_light"
+        android:layout_above="@+id/button5"
+        android:layout_toEndOf="@+id/button1"
+        android:layout_marginBottom="15dp" />
+
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/button3"
+        android:background="@android:color/holo_blue_light"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_alignStart="@+id/button6" />
+
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/button4"
+        android:background="@android:color/holo_blue_light"
+        android:layout_marginRight="15dp"
+        android:layout_above="@+id/button7"
+        android:layout_alignStart="@+id/button7" />
+
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/button5"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/holo_blue_light" />
+
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/button6"
+        android:background="@android:color/holo_blue_light"
+        android:layout_above="@+id/button9"
+        android:layout_alignStart="@+id/button9" />
+
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/button7"
+        android:background="@android:color/holo_blue_light"
+        android:layout_below="@+id/button5"
+        android:layout_toStartOf="@+id/button8"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp" />
+
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/button8"
+        android:background="@android:color/holo_blue_light"
+        android:layout_below="@+id/button5"
+        android:layout_alignStart="@+id/button5"
+        android:layout_marginTop="15dp" />
+
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/button9"
+        android:background="@android:color/holo_blue_light"
+        android:layout_below="@+id/button5"
+        android:layout_toEndOf="@+id/button8"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp" />
+
+</RelativeLayout>

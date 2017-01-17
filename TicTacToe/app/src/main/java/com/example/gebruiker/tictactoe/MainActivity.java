@@ -5,10 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private String mode;
 
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button buttonSingleplayer = (Button) findViewById(R.id.button);
+        final Button buttonSingleplayer = (Button) findViewById(R.id.buttonSinglePlayer);
         buttonSingleplayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final Button buttonMultiplayer = (Button) findViewById(R.id.button2);
+        final Button buttonMultiplayer = (Button) findViewById(R.id.buttonMultiplayer);
         buttonMultiplayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -41,15 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void gameButtonClicked(String mode, View v) {
 
-//        Intent nextScreenIntent = new Intent(v.getContext(), GameActivity.class);
-//        nextScreenIntent.putExtra("mode", mode);
-
-        setContentView(R.layout.activity_game);
-        TextView textViewMode = (TextView) findViewById(R.id.mode);
-        textViewMode.setText(mode);
-//
-//        startActivity(nextScreenIntent);
+        Intent intent = new Intent(MainActivity.this, GameActivity.class);
+        intent.putExtra("EXTRA_MESSAGE", mode);
+        startActivity(intent);
 
     }
 
+    @Override
+    public void onClick(View view) {
+
+    }
 }

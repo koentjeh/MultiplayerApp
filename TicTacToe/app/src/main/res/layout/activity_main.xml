@@ -35,23 +35,23 @@
             tools:ignore="UselessParent">
 
             <Button
-                android:id="@+id/button"
-                android:text="@string/oneplayer"
+                android:id="@+id/buttonSinglePlayer"
+                android:text="@string/singleplayer"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:background="@color/accent"
                 android:layout_marginBottom="10dp" />
 
             <Button
-                android:id="@+id/button2"
-                android:text="@string/twoplayer"
+                android:id="@+id/buttonMultiplayer"
+                android:text="@string/multiplayer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/accent"
                 android:layout_marginBottom="10dp" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/buttonAboutUs"
                 android:text="@string/aboutus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

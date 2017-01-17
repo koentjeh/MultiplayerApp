@@ -17,43 +17,43 @@
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/button1"
+        android:id="@+id/buttonA1"
         android:background="@android:color/holo_blue_light"
         android:layout_marginRight="15dp"
-        android:layout_above="@+id/button4"
-        android:layout_alignStart="@+id/button4"
+        android:layout_above="@+id/buttonB1"
+        android:layout_alignStart="@+id/buttonB1"
         android:layout_marginBottom="15dp" />
 
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/button2"
+        android:id="@+id/buttonA2"
         android:background="@android:color/holo_blue_light"
-        android:layout_above="@+id/button5"
-        android:layout_toEndOf="@+id/button1"
+        android:layout_above="@+id/buttonB2"
+        android:layout_toEndOf="@+id/buttonA1"
         android:layout_marginBottom="15dp" />
 
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/button3"
+        android:id="@+id/buttonA3"
         android:background="@android:color/holo_blue_light"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_alignStart="@+id/button6" />
+        android:layout_alignBottom="@+id/buttonA2"
+        android:layout_alignStart="@+id/buttonB3" />
 
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/button4"
+        android:id="@+id/buttonB1"
         android:background="@android:color/holo_blue_light"
         android:layout_marginRight="15dp"
-        android:layout_above="@+id/button7"
-        android:layout_alignStart="@+id/button7" />
+        android:layout_above="@+id/buttonC1"
+        android:layout_alignStart="@+id/buttonC1" />
 
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/button5"
+        android:id="@+id/buttonB2"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_blue_light" />
@@ -61,37 +61,37 @@
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/button6"
+        android:id="@+id/buttonB3"
         android:background="@android:color/holo_blue_light"
-        android:layout_above="@+id/button9"
-        android:layout_alignStart="@+id/button9" />
+        android:layout_above="@+id/buttonC3"
+        android:layout_alignStart="@+id/buttonC3" />
 
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/button7"
+        android:id="@+id/buttonC1"
         android:background="@android:color/holo_blue_light"
-        android:layout_below="@+id/button5"
-        android:layout_toStartOf="@+id/button8"
+        android:layout_below="@+id/buttonB2"
+        android:layout_toStartOf="@+id/buttonC2"
         android:layout_marginTop="15dp"
         android:layout_marginRight="15dp" />
 
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/button8"
+        android:id="@+id/buttonC2"
         android:background="@android:color/holo_blue_light"
-        android:layout_below="@+id/button5"
-        android:layout_alignStart="@+id/button5"
+        android:layout_below="@+id/buttonB2"
+        android:layout_alignStart="@+id/buttonB2"
         android:layout_marginTop="15dp" />
 
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/button9"
+        android:id="@+id/buttonC3"
         android:background="@android:color/holo_blue_light"
-        android:layout_below="@+id/button5"
-        android:layout_toEndOf="@+id/button8"
+        android:layout_below="@+id/buttonB2"
+        android:layout_toEndOf="@+id/buttonC2"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp" />
 
@@ -102,7 +102,7 @@
         android:layout_marginTop="28dp"
         android:id="@+id/textViewScoreX"
         android:textSize="36sp"
-        android:layout_below="@+id/button7"
+        android:layout_below="@+id/buttonC1"
         android:layout_centerHorizontal="true" />
 
     <TextView

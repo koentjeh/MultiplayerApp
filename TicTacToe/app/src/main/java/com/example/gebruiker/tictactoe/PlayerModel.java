@@ -18,7 +18,7 @@ public class PlayerModel {
         return name;
     }
 
-    public String figure() {
+    public String getFigure() {
         return figure;
     }
 }

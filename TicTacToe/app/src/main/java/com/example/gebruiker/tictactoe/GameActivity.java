@@ -23,5 +23,4 @@ public class GameActivity extends AppCompatActivity {
         textViewMode.setText(mode);
 
     }
-
 }

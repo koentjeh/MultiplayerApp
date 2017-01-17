@@ -59,7 +59,7 @@
                 android:layout_marginBottom="10dp" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/closeApplication"
                 android:text="@string/exit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

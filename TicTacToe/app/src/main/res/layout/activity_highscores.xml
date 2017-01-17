@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gebruiker.tictactoe.MainActivity"
+    android:background="@color/primary"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="@string/app_title"
+        android:textSize="40dp"
+        android:textColor="@color/icons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:gravity="center_horizontal|center"
+        tools:ignore="SpUsage"
+        android:paddingTop="20dp" />
+
+    <TextView
+        android:text="@string/highscores"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:gravity="center_horizontal|center"
+        tools:ignore="SpUsage"
+        android:layout_marginBottom="20dp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"/>
+</LinearLayout>

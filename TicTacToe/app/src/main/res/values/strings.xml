@@ -3,8 +3,8 @@
 
     <string name="app_title">Tic Tac Toe</string>
 
-    <string name="oneplayer">1 Player(start)</string>
-    <string name="twoplayer">2 Players</string>
+    <string name="singleplayer">1 Player(start)</string>
+    <string name="multiplayer">2 Players</string>
     <string name="aboutus">About Us</string>
     <string name="exit">Exit</string>
 

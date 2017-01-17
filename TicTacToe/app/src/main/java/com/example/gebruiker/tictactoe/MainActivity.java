@@ -21,8 +21,11 @@ public class MainActivity extends AppCompatActivity {
         buttonSingleplayer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                mode = "Singleplayer";
-                gameButtonClicked(mode, v);
+//                mode = "Singleplayer";
+//                gameButtonClicked(mode, v);
+
+                Intent intent = new Intent(v.getContext(), PregameActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -33,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
 
                 mode = "Multiplayer";
                 gameButtonClicked(mode, v);
+
+            }
+        });
+
+        final Button aboutUs = (Button) findViewById(R.id.button3);
+        aboutUs.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                setContentView(R.layout.activity_aboutus);
 
             }
         });

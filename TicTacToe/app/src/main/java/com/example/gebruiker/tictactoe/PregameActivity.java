@@ -24,7 +24,6 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
     private Button buttonOPregame;
     private Button buttonRandomPregame;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +61,16 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
                     errors = true;
                 }
 
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // Nog controleren op dubbele namen?
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
                 // Als er geen errors zijn gevonden start het spel
                 if (errors == false) {
+                    // Nieuw scherm openen en data meegeven
                     Intent intent = new Intent(v.getContext(), GameActivity.class);
+                    intent.putExtra("playerName", playerName);
+                    intent.putExtra("startFigure", startFigure);
                     startActivity(intent);
                 }
             }

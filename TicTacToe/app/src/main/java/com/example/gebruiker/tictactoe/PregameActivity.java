@@ -1,6 +1,5 @@
 package com.example.gebruiker.tictactoe;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by Gebruiker on 2017-01-17.
@@ -18,14 +16,14 @@ import android.widget.Toast;
 
 public class PregameActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String TAG = "PregameActivity";
+
     private String playerName;
     private String startFigure;
 
     private Button buttonXPregame;
     private Button buttonOPregame;
     private Button buttonRandomPregame;
-
-    private static final String TAG = "PregameActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +45,14 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
         buttonOPregame.setOnClickListener(this);
         buttonRandomPregame.setOnClickListener(this);
 
-        final Button buttonStartGame = (Button) findViewById(R.id.startGame);
-
+        Button buttonStartGame = (Button) findViewById(R.id.startGame);
         buttonStartGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Controle op errors
                 boolean error = false;
 
                 // Naam van speler ophalen uit input
-                playerName = inputPlayerName.getText().toString();
+                playerName = inputPlayerName.getText().toString().toUpperCase();
 
                 // Minimaal lengte naam = 4 anders error melding
                 if (playerName.length() < 4) {
@@ -94,15 +91,14 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
-
+        
         // Als knop is ingedrukt zet actief anders inactief
         if (view.getId() == R.id.xPregame) {
-
+            Log.i(TAG, "onClick: set starting player: X");
             // Kruisje begint
             startFigure = "X";
             // knop actief
             buttonXPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.accent));
-
         } else {
             // knop inactief
             buttonXPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.primary_light));
@@ -110,12 +106,11 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
 
         // Als knop is ingedrukt zet actief anders inactief
         if (view.getId() == R.id.oPregame) {
-
+            Log.i(TAG, "onClick: set starting player: O");
             // Rondje begint
             startFigure = "O";
             // knop actief
             buttonOPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.accent));
-
         } else {
             // knop inactief
             buttonOPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.primary_light));
@@ -123,12 +118,11 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
 
         // Als knop is ingedrukt zet actief anders inactief
         if (view.getId() == R.id.randomPregame) {
-
+            Log.i(TAG, "onClick: set starting player: R");
             // Kruisje of rondje begint (Willekeurig)
             startFigure = "R";
             // knop actief
             buttonRandomPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.accent));
-
         } else {
             // knop inactief
             buttonRandomPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.primary_light));

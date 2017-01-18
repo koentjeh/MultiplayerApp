@@ -5,9 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,5 +59,21 @@ public class MainActivity extends AppCompatActivity {
                 System.exit(1);
             }
         });
+
+//        // Genereer een willekeurige highscores spelerslijst
+//        PlayerDBHandler pdb = new PlayerDBHandler(getApplicationContext());
+//        PlayerModel p;
+//
+//        int range = (100 - 1) + 1;
+//        for (int i = 0; i < 20; i++) {
+//            int random = (int)(Math.random() * range) + 1;
+//
+//            p = new PlayerModel();
+//            p.name = "Speler" + i;
+//            p.score = String.valueOf(random);
+//            pdb.addPlayer(p);
+//
+//            Log.i(TAG, "onCreate: Generated player with name: " + p.name);
+//        }
     }
 }

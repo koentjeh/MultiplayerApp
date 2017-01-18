@@ -42,6 +42,8 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
                 COLOMN_SCORE + " INTEGER" +
                 ")";
         db.execSQL(CREATE_PLAYER_TABLE);
+
+        Log.i(TAG, "onCreate: Tabel aangemaakt.");
     }
 
     // Bij verandering van de db wordt onUpgrade aangeroepen.
@@ -50,9 +52,13 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + DB_TABLE_NAME);
         onCreate(db);
+
+        Log.i(TAG, "onCreate: Tabel upgrade uitgevoerd.");
     }
 
     // Check op dubbele namen
+    // return true = naam gevonden
+    // return false = naam beschikbaar
     public Boolean checkDuplicatePlayerName(String name) {
 
         Boolean error = false;
@@ -60,11 +66,10 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
 
         // Als spelernaam is gevonden
         if (cursor.moveToFirst()) {
-            // Geef error melding (result)
             Log.i(TAG, "addPlayer: naam bestaat al");
+
             error = true;
         } else {
-            // error blijft false
             Log.i(TAG, "addPlayer: naam bestaat nog niet");
         }
         cursor.close();
@@ -75,16 +80,14 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
     // Speler toevoegen aan highscores
     public void addPlayer(PlayerModel player) {
 
-        String result = "";
+        // Alle namen zijn UPPERCASE
+        player.name = player.name.toUpperCase();
+
         Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + DB_TABLE_NAME + " WHERE " + COLOMN_NAME + "=" + "\"" + player.name + "\"", null);
 
-        // Als spelernaam is gevonden
+        // Check of spelernaam is gevonden
         if (cursor.moveToFirst()) {
-
-            // Geef error melding (result)
             Log.i(TAG, "addPlayer: naam bestaat al");
-            result = "De gekozen naam bestaat al.";
-
         } else {
             Log.i(TAG, "addPlayer: naam bestaat nog niet");
 
@@ -97,12 +100,8 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getWritableDatabase();
             db.insert(DB_TABLE_NAME, null, values);
             db.close();
-
-            result = "";
         }
         cursor.close();
-
-//        return result;
     }
 
     // Players.db database leegmaken
@@ -110,31 +109,34 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
         Log.i(TAG, "resetHighscores: deleting table (" + DB_TABLE_NAME + ")");
 
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("TRUNCATE TABLE " + DB_TABLE_NAME);
+        db.execSQL("DELETE FROM " + DB_TABLE_NAME);
         
         String result = "Alle data is verwijderd.";
 
         return result;
     }
 
+    // Lijst met 10 spelers met beste score ophalen
     public ArrayList<PlayerModel> getHighscoreList() {
-        Log.i(TAG, "getHighscorelist()");
-
         Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + DB_TABLE_NAME + " ORDER BY " + COLOMN_SCORE + " DESC LIMIT 10", null);
 
         ArrayList<PlayerModel> playerList = new ArrayList<>();
         PlayerModel p;
+        // Begin bij positie 1
         int i = 1;
 
         cursor.moveToFirst();
         while(!cursor.isAfterLast()) {
 
+            // Speler object aan lijst toevoegen
             p = new PlayerModel();
             p.highscorePos = i;
             p.id = cursor.getString(cursor.getColumnIndex(COLOMN_ID));
             p.name = cursor.getString(cursor.getColumnIndex(COLOMN_NAME));
             p.score = cursor.getString(cursor.getColumnIndex(COLOMN_SCORE));
             playerList.add(p);
+
+            Log.i(TAG, "getHighscorelist: Player at position " + i + "added to list.");
 
             i++;
             cursor.moveToNext();
@@ -143,6 +145,8 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
 
         // Als er geen speler in de database staat geef dummy data mee.
         if (playerList.size() == 0) {
+            Log.i(TAG, "getHighscoreList: ");
+
             p = new PlayerModel();
             p.highscorePos = 0;
             p.name = "Nog geen data om te weergeven.";
@@ -150,6 +154,7 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
             playerList.add(p);
         }
 
+        // Return de lijst met 10 beste spelers
         return playerList;
     }
 }

@@ -3,6 +3,7 @@ package com.example.gebruiker.tictactoe;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.R.color.holo_blue_light;
 
 /**
  * Created by wbjar on 16-1-2017.
@@ -23,6 +26,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Boolean turn = true; // If true, turn = X. If false, turn = O.
     private int turnCount = 0;
     private TextView textViewScore;
+//    private int score = 0;
+
 
     PlayerModel player;
 
@@ -69,10 +74,21 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.buttonNextGame) {
-            //do something
+            clearPlayField();
         } else {
             Button button = (Button) view;
             buttonClicked(button);
+//            Log.d("Score:", player.score);
+        }
+    }
+
+    private void clearPlayField() {
+        for(Button button : buttonArray) {
+            button.setText("");
+//            Log.d("color", ""+defaultButtonColor);
+            button.setBackgroundColor(getResources().getColor(holo_blue_light));
+            button.setClickable(true);
+            turnCount = 0;
         }
     }
 

@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Log.i(TAG, "onClick: redirect -> prestartgame activity");
+                iddlecounter.cancel();
                 Intent intent = new Intent(MainActivity.this, PregameActivity.class);
                 startActivity(intent);
             }
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Log.i(TAG, "onClick: redirect -> highscores activity");
+                iddlecounter.cancel();
                 Intent intent = new Intent(getBaseContext(), HighscoreActivity.class);
                 startActivity(intent);
             }
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Log.i(TAG, "onClick: redirect -> aboutus activity");
+                iddlecounter.cancel();
                 Intent intent = new Intent(MainActivity.this, AboutusActivity.class);
                 startActivity(intent);
             }
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Sluit de app af
+                iddlecounter.cancel();
                 android.os.Process.killProcess(android.os.Process.myPid());
                 System.exit(1);
             }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import static android.R.color.holo_blue_light;
 
@@ -29,15 +30,40 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Boolean turn = true; // If true, turn = X. If false, turn = O.
     private int turnCount = 0;
     private TextView textViewScore;
-//    private int score = 0;
-
-
     PlayerModel player;
+
+    // Timer
+    CountDownTimer gamecounter;
+    // Timer starttijd
+    private int startTimer = 120; // in seconden
+    // Timer format
+    private static final String FORMAT = "%02d:%02d";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        // Timer
+        final TextView textViewTimer = (TextView) findViewById(R.id.textViewTimer);
+
+        gamecounter = new CountDownTimer(startTimer*1000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+
+                textViewTimer.setText(""+String.format(FORMAT,
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                                TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+            }
+
+            public void onFinish() {
+                textViewTimer.setText("Je hebt verloren!");
+                afterLose();
+
+            }
+        }.start();
 
         // Get Intent.
         Intent intent = getIntent();
@@ -266,7 +292,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void afterLose() {
-        // Do something
+        // Stop timer
+        gamecounter.cancel();
+
+
+        // Voeg speler toe aan highscores
+        PlayerDBHandler pdb = new PlayerDBHandler(getApplicationContext());
+        pdb.addPlayer(player);
     }
 
     private void notification(String s) {
@@ -279,6 +311,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void afterGameEnd() {
+
         buttonNextGame.setVisibility(View.VISIBLE);
         buttonNextGame.setOnClickListener(this);
 

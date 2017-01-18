@@ -3,8 +3,7 @@
 
     <string name="app_title">Tic Tac Toe</string>
 
-    <string name="singleplayer">1 Player(start)</string>
-    <string name="multiplayer">2 Players</string>
+    <string name="startgame">Start spel</string>
     <string name="aboutus">About Us</string>
     <string name="exit">Exit</string>
 
@@ -13,7 +12,6 @@
     <string name="figureX">X</string>
     <string name="figureO">O</string>
     <string name="figureRandom">X/O</string>
-    <string name="playgame">Start spel</string>
 
     <string name="highscores">Highscores</string>
 </resources>

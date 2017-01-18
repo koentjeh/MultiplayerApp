@@ -5,9 +5,9 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Mode"
+        android:text="Playername"
         android:layout_width="match_parent"
-        android:id="@+id/mode"
+        android:id="@+id/textViewPlayerName"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_height="100dp"
@@ -20,43 +20,34 @@
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/row1col1"
+        android:id="@+id/buttonA1"
         android:background="@android:color/holo_blue_light"
         android:layout_marginRight="15dp"
-        android:layout_above="@+id/row2col1"
-        android:layout_alignStart="@+id/row2col1"
+        android:layout_above="@+id/buttonB1"
+        android:layout_alignStart="@+id/buttonB1"
         android:layout_marginBottom="15dp" />
 
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/row1col2"
+        android:id="@+id/buttonA2"
         android:background="@android:color/holo_blue_light"
-        android:layout_above="@+id/row2col2"
-        android:layout_toEndOf="@+id/row1col1"
+        android:layout_above="@+id/buttonB2"
+        android:layout_toEndOf="@+id/buttonA1"
         android:layout_marginBottom="15dp" />
 
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/row1col3"
+        android:id="@+id/buttonA3"
         android:background="@android:color/holo_blue_light"
-        android:layout_alignBottom="@+id/row1col2"
-        android:layout_alignStart="@+id/row2col3" />
+        android:layout_alignBottom="@+id/buttonA2"
+        android:layout_alignStart="@+id/buttonB3" />
 
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/row2col1"
-        android:background="@android:color/holo_blue_light"
-        android:layout_marginRight="15dp"
-        android:layout_above="@+id/row3col1"
-        android:layout_alignStart="@+id/row3col1" />
-
-    <Button
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:id="@+id/row2col2"
+        android:id="@+id/buttonB2"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_blue_light" />
@@ -64,58 +55,66 @@
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/row2col3"
+        android:id="@+id/buttonB3"
         android:background="@android:color/holo_blue_light"
-        android:layout_above="@+id/row3col3"
-        android:layout_alignStart="@+id/row3col3" />
+        android:layout_above="@+id/buttonC3"
+        android:layout_alignStart="@+id/buttonC3" />
 
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/row3col1"
+        android:id="@+id/buttonC1"
         android:background="@android:color/holo_blue_light"
-        android:layout_below="@+id/row2col2"
-        android:layout_toStartOf="@+id/row3col2"
+        android:layout_below="@+id/buttonB2"
+        android:layout_toStartOf="@+id/buttonC2"
         android:layout_marginTop="15dp"
         android:layout_marginRight="15dp" />
 
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/row3col2"
+        android:id="@+id/buttonC2"
         android:background="@android:color/holo_blue_light"
-        android:layout_below="@+id/row2col2"
-        android:layout_alignStart="@+id/row2col2"
+        android:layout_below="@+id/buttonB2"
+        android:layout_alignStart="@+id/buttonB2"
         android:layout_marginTop="15dp" />
 
     <Button
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:id="@+id/row3col3"
+        android:id="@+id/buttonC3"
         android:background="@android:color/holo_blue_light"
-        android:layout_below="@+id/row2col2"
-        android:layout_toEndOf="@+id/row3col2"
+        android:layout_below="@+id/buttonB2"
+        android:layout_toEndOf="@+id/buttonC2"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp" />
 
-    <TextView
-        android:text="Score X = 0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:id="@+id/textViewScoreX"
-        android:textSize="36sp"
-        android:layout_below="@+id/row3col1"
-        android:layout_centerHorizontal="true" />
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/buttonB1"
+        android:background="@android:color/holo_blue_light"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/buttonA2"
+        android:layout_alignStart="@+id/buttonC1" />
 
     <TextView
         android:text="Score O = 0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
         android:id="@+id/textViewScoreO"
         android:textSize="36sp"
-        android:layout_below="@+id/textViewScoreX"
-        android:layout_alignEnd="@+id/textViewScoreX" />
+        android:layout_marginBottom="19dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Score X = 0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewScoreX"
+        android:textSize="36sp"
+        android:layout_above="@+id/textViewScoreO"
+        android:layout_alignStart="@+id/textViewScoreO" />
 
 </RelativeLayout>

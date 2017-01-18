@@ -18,27 +18,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button buttonSingleplayer = (Button) findViewById(R.id.buttonSinglePlayer);
-        buttonSingleplayer.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-//                mode = "Singleplayer";
-//                gameButtonClicked(mode, v);
-
-                Intent intent = new Intent(v.getContext(), PregameActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-        final Button buttonMultiplayer = (Button) findViewById(R.id.buttonMultiplayer);
-        buttonMultiplayer.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                mode = "Multiplayer";
-                gameButtonClicked(mode, v);
-
-            }
+        final Button buttonStartGame = (Button) findViewById(R.id.buttonStartGame);
+        buttonStartGame.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) { startButtonClicked(mode, v); }
         });
 
         final Button aboutUs = (Button) findViewById(R.id.buttonAboutUs);
@@ -61,10 +43,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void gameButtonClicked(String mode, View v) {
+    private void startButtonClicked(String mode, View v) {
 
-        Intent intent = new Intent(MainActivity.this, GameActivity.class);
-        intent.putExtra("EXTRA_MESSAGE", mode);
+        Intent intent = new Intent(MainActivity.this, PregameActivity.class);
         startActivity(intent);
 
     }

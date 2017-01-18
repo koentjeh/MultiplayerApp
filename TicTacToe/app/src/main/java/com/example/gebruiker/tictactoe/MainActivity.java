@@ -41,8 +41,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        final Button aboutUs = (Button) findViewById(R.id.buttonAboutUs);
-        aboutUs.setOnClickListener(new View.OnClickListener() {
+        final Button buttonHighscores = (Button) findViewById(R.id.buttonHighscores);
+        buttonHighscores.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getBaseContext(), HighscoreActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        final Button buttonAboutUs = (Button) findViewById(R.id.buttonAboutUs);
+        buttonAboutUs.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 setContentView(R.layout.activity_aboutus);
@@ -50,8 +60,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        final Button exitApplication = (Button) findViewById(R.id.closeApplication);
-        exitApplication.setOnClickListener(new View.OnClickListener() {
+        final Button buttonExitApplication = (Button) findViewById(R.id.closeApplication);
+        buttonExitApplication.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Sluit de app af
                 android.os.Process.killProcess(android.os.Process.myPid());

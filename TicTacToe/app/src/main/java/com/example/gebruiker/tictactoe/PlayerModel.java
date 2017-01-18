@@ -6,12 +6,12 @@ package com.example.gebruiker.tictactoe;
 
 public class PlayerModel {
 
-    private final String name;
-    private final String figure;
+    public String name;
+    public String figure;
+    public String score;
 
-    public PlayerModel(String name, String figure) {
-        this.name = name;
-        this.figure = figure;
+    public PlayerModel() {
+
     }
 
     public String getName() {
@@ -21,4 +21,6 @@ public class PlayerModel {
     public String getFigure() {
         return figure;
     }
+
+    public String getScore() { return score; }
 }

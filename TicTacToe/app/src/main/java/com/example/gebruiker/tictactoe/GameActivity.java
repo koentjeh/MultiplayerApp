@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Random;
 
 import static android.R.color.holo_blue_light;
 
@@ -69,23 +72,27 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             button.setOnClickListener(this);
         }
 
+//        b2.performClick();
+
     }
 
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.buttonNextGame) {
+            buttonNextGame.setVisibility(View.INVISIBLE);
             clearPlayField();
+//            if(!turn) {
+                performComputerTurn();
+//            }
         } else {
             Button button = (Button) view;
             buttonClicked(button);
-//            Log.d("Score:", player.score);
         }
     }
 
     private void clearPlayField() {
         for(Button button : buttonArray) {
             button.setText("");
-//            Log.d("color", ""+defaultButtonColor);
             button.setBackgroundColor(getResources().getColor(holo_blue_light));
             button.setClickable(true);
             turnCount = 0;
@@ -93,20 +100,98 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void buttonClicked(Button b) {
-        if(turn) { // X's turn.
+        if(turn) {
             b.setText("X");
-        } else { // O's turn.
-            b.setText("O");
+            afterButtonClicked(b);
         }
+        if(!checkWinner()) {
+            performComputerTurn();
+        }
+    }
 
+    private void performComputerTurn() {
+        if(!turn) {
+            int i = new Random().nextInt(9);
+            Log.d("int", ""+i);
+            selectRandomButton(i);
+        }
+    }
+
+    private void selectRandomButton(int i) {
+        if(i == 0) {
+            if(a1.isClickable()) {
+                a1.setText("O");
+                afterButtonClicked(a1);
+            } else {
+                performComputerTurn();
+            }
+        } else if(i == 1) {
+            if(a2.isClickable()) {
+                a2.setText("O");
+                afterButtonClicked(a2);
+            } else {
+                performComputerTurn();
+            }
+        } else if(i == 2) {
+            if(a3.isClickable()) {
+                a3.setText("O");
+                afterButtonClicked(a3);
+            } else {
+                performComputerTurn();
+            }
+        } else if(i == 3) {
+            if(b1.isClickable()) {
+                b1.setText("O");
+                afterButtonClicked(b1);
+            } else {
+                performComputerTurn();
+            }
+        } else if(i == 4) {
+            if(a2.isClickable()) {
+                a2.setText("O");
+                afterButtonClicked(a2);
+            } else {
+                performComputerTurn();
+            }
+        } else if(i == 5) {
+            if(b3.isClickable()) {
+                b3.setText("O");
+                afterButtonClicked(b3);
+            } else {
+                performComputerTurn();
+            }
+        } else if(i == 6) {
+            if(c1.isClickable()) {
+                c1.setText("O");
+                afterButtonClicked(c1);
+            } else {
+                performComputerTurn();
+            }
+        } else if(i == 7) {
+            if(c2.isClickable()) {
+                c2.setText("O");
+                afterButtonClicked(c2);
+            } else {
+                performComputerTurn();
+            }
+        } else if(i == 8) {
+            if(c3.isClickable()) {
+                c3.setText("O");
+                afterButtonClicked(c3);
+            } else {
+                performComputerTurn();
+            }
+        }
+        checkWinner();
+    }
+
+    private void afterButtonClicked(Button b) {
         b.setClickable(false);
         turn = !turn;
         turnCount++;
-        checkWinner();
-
     }
 
-    private void checkWinner() {
+    private boolean checkWinner() {
         boolean winner = false;
         String color = "#000000";
 
@@ -160,20 +245,28 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (winner) {
-            if (!turn) {
+            if (!turn) { // X wins.
                 player.score++;
                 setScore(player.score);
-                notification("X heeft gewonnnen!");
-            } else {
-                notification("O heeft gewonnnen!");
+                notification("Je hebt gewonnen!");
+                afterGameEnd();
+                return true;
+            } else { // O wins.
+                notification("Je hebt verloren!");
+                afterLose();
+                return true;
             }
-            afterGameEnd();
 
         } else if (turnCount == 9) {
             notification("Het is gelijkspel!");
             afterGameEnd();
+            return true;
         }
+        return false;
+    }
 
+    private void afterLose() {
+        // Do something
     }
 
     private void notification(String s) {

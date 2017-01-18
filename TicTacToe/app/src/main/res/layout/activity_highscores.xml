@@ -14,7 +14,7 @@
         android:textColor="@color/icons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
+        android:id="@+id/appTitle"
         android:gravity="center_horizontal|center"
         tools:ignore="SpUsage"
         android:paddingTop="20dp" />
@@ -24,13 +24,13 @@
         android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
+        android:id="@+id/appSubtitle"
         android:gravity="center_horizontal|center"
         tools:ignore="SpUsage"
         android:layout_marginBottom="20dp" />
 
     <ListView
+        android:id="@+id/highscoreListItem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background"/>
+        android:layout_height="match_parent" />
 </LinearLayout>

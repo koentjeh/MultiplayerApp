@@ -9,7 +9,7 @@ public class PlayerModel {
     public String id;
     public int highscorePos;
     public String name;
-    public String score;
+    public int score;
 
     public PlayerModel() {
 

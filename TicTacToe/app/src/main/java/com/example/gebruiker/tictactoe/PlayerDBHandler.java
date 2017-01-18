@@ -133,7 +133,7 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
             p.highscorePos = i;
             p.id = cursor.getString(cursor.getColumnIndex(COLOMN_ID));
             p.name = cursor.getString(cursor.getColumnIndex(COLOMN_NAME));
-            p.score = cursor.getString(cursor.getColumnIndex(COLOMN_SCORE));
+            p.score = cursor.getInt(cursor.getColumnIndex(COLOMN_SCORE));
             playerList.add(p);
 
             Log.i(TAG, "getHighscorelist: Player at position " + i + "added to list.");
@@ -150,7 +150,7 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
             p = new PlayerModel();
             p.highscorePos = 0;
             p.name = "Nog geen data om te weergeven.";
-            p.score = "";
+            p.score = 0;
             playerList.add(p);
         }
 

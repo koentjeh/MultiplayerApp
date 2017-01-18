@@ -22,8 +22,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private Button[] buttonArray;
     private Boolean turn = true; // If true, turn = X. If false, turn = O.
     private int turnCount = 0;
-    private int score = 0;
     private TextView textViewScore;
+
+    PlayerModel player;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +33,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         // Get Intent.
         Intent intent = getIntent();
-        String playerName = intent.getStringExtra("playerName");
+
+        // Maak nieuwe speler aan
+        player = new PlayerModel();
+        player.name = intent.getStringExtra("playerName");
+        player.score = 0;
+
         TextView textViewPlayerName = (TextView) findViewById(R.id.textViewPlayerName);
-        textViewPlayerName.setText(playerName);
+        textViewPlayerName.setText(player.name);
 
         buttonNextGame = (Button) findViewById(R.id.buttonNextGame);
         textViewScore = (TextView) findViewById(R.id.textViewScore);
@@ -139,8 +145,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         if (winner) {
             if (!turn) {
-                score++;
-                setScore(score);
+                player.score++;
+                setScore(player.score);
                 notification("X heeft gewonnnen!");
             } else {
                 notification("O heeft gewonnnen!");
@@ -173,7 +179,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setScore(int score) {
-        this.score = score;
-        textViewScore.setText("Score: " + this.score);
+        player.score = score;
+        textViewScore.setText("Score: " + player.score);
     }
 }

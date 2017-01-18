@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //            p = new PlayerModel();
 //            p.name = "Speler" + i;
-//            p.score = String.valueOf(random);
+//            p.score = random;
 //            pdb.addPlayer(p);
 //
 //            Log.i(TAG, "onCreate: Generated player with name: " + p.name);

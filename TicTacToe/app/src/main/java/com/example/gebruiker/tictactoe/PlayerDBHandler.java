@@ -5,8 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.BaseColumns;
 import android.util.Log;
+
+import java.util.ArrayList;
 
 /**
  * Created by Gebruiker on 2017-01-17.
@@ -26,10 +27,8 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
     private static final String COLOMN_SCORE = "score";
 
     // Default constructor
-    public PlayerDBHandler(Context context, String name,
-                           SQLiteDatabase.CursorFactory factory,
-                           int version) {
-        super(context, DB_NAME, factory, DB_VERSION);
+    public PlayerDBHandler(Context context) {
+        super(context, DB_NAME, null, DB_VERSION);
     }
 
     // Als de db niet bestaat wordt de db gemaakt. In de onCreate() de query
@@ -53,38 +52,82 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Speler toevoegen
-    public void addPlayer(PlayerModel player)
-    {
-        ContentValues values = new ContentValues();
-        values.put(COLOMN_NAME, player.getName());
-        values.put(COLOMN_SCORE, player.getScore());
+    public Boolean checkDuplicatePlayerName(String name) {
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(DB_TABLE_NAME, null, values);
-        db.close();
+        Boolean error = false;
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + DB_TABLE_NAME + " WHERE " + COLOMN_NAME + "=" + "\"" + name + "\"", null);
+
+        // Als spelernaam is gevonden
+        if (cursor.moveToFirst()) {
+            // Geef error melding (result)
+            Log.i(TAG, "addPlayer: naam bestaat al");
+            error = true;
+        } else {
+            // error blijft false
+            Log.i(TAG, "addPlayer: naam bestaat nog niet");
+        }
+        cursor.close();
+
+        return error;
     }
 
-    public void getPersonByName(String name) {
+    // Speler toevoegen aan highscores
+    public void addPlayer(PlayerModel player) {
 
-        String query_a = "SELECT * FROM " + DB_TABLE_NAME + " WHERE " +
-                COLOMN_NAME + "=" + "\"" + name + "\"";
+        String result = "";
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + DB_TABLE_NAME + " WHERE " + COLOMN_NAME + "=" + "\"" + player.name + "\"", null);
 
-        String query_b = "SELECT * FROM " + DB_TABLE_NAME;
+        // Als spelernaam is gevonden
+        if (cursor.moveToFirst()) {
 
-        SQLiteDatabase db = this.getWritableDatabase();
+            // Geef error melding (result)
+            Log.i(TAG, "addPlayer: naam bestaat al");
+            result = "De gekozen naam bestaat al.";
 
-        Cursor cursor = db.rawQuery(query_b, null);
+        } else {
+            Log.i(TAG, "addPlayer: naam bestaat nog niet");
+
+            // Voeg de speler toe
+            ContentValues values = new ContentValues();
+            values.put(COLOMN_NAME, player.name);
+            values.put(COLOMN_SCORE, player.score);
+
+            // Voer query uit
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.insert(DB_TABLE_NAME, null, values);
+            db.close();
+
+            result = "";
+        }
+        cursor.close();
+
+//        return result;
+    }
+
+    public ArrayList<PlayerModel> getHighscoreList() {
+        Log.i(TAG, "getHighscorelist()");
+
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + DB_TABLE_NAME + " ORDER BY " + COLOMN_SCORE + " DESC LIMIT 10", null);
+
+        ArrayList<PlayerModel> playerList = new ArrayList<>();
+        PlayerModel p;
+        int i = 1;
 
         cursor.moveToFirst();
-        while(cursor.moveToNext()) {
-            Log.i(TAG, "--------------------------------------------");
-            Log.i(TAG, cursor.getString(cursor.getColumnIndex(COLOMN_ID)));
-            Log.i(TAG, cursor.getString(cursor.getColumnIndex(COLOMN_NAME)));
-            Log.i(TAG, cursor.getString(cursor.getColumnIndex(COLOMN_SCORE)));
-            Log.i(TAG, "--------------------------------------------");
-        }
+        while(!cursor.isAfterLast()) {
 
-        db.close();
+            p = new PlayerModel();
+            p.highscorePos = i;
+            p.id = cursor.getString(cursor.getColumnIndex(COLOMN_ID));
+            p.name = cursor.getString(cursor.getColumnIndex(COLOMN_NAME));
+            p.score = cursor.getString(cursor.getColumnIndex(COLOMN_SCORE));
+            playerList.add(p);
+
+            i++;
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return playerList;
     }
 }

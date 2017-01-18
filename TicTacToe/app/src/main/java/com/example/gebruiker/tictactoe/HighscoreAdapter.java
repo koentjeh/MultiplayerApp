@@ -58,7 +58,7 @@ public class HighscoreAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
 
         PlayerModel player = (PlayerModel) list.get(position);
-        viewHolder.playerNameTextView.setText( list.get(position).toString() );
+        viewHolder.playerPositionTextView.setText( Integer.toString(player.highscorePos) + "." );
         viewHolder.playerNameTextView.setText( player.name );
         viewHolder.playerScoreTextView.setText( player.score );
 
@@ -66,8 +66,8 @@ public class HighscoreAdapter extends BaseAdapter {
     }
 
     private static class ViewHolder {
+        public TextView playerPositionTextView;
         public TextView playerNameTextView;
         public TextView playerScoreTextView;
-        public TextView playerPositionTextView;
     }
 }

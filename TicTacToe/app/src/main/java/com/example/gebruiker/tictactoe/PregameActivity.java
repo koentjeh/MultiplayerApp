@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,8 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
     private Button buttonXPregame;
     private Button buttonOPregame;
     private Button buttonRandomPregame;
+
+    private static final String TAG = "PregameActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,7 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
         buttonStartGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Controle op errors
-                boolean errors = false;
+                boolean error = false;
 
                 // Naam van speler ophalen uit input
                 playerName = inputPlayerName.getText().toString();
@@ -58,15 +61,27 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
                 if (playerName.length() < 4) {
                     TextView errorMsg = (TextView) findViewById(R.id.errorMsg);
                     errorMsg.setText("Naam moet uit minimaal 4 karakters bestaan.");
-                    errors = true;
+                    error = true;
+                    Log.i(TAG, "name length: min 4");
                 }
 
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                // Nog controleren op dubbele namen?
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // Controleer op dubbele namen
+                // Speler database
+                PlayerDBHandler pdb = new PlayerDBHandler(getApplicationContext());
+
+                // true = dubbele naam geef melding
+                if (pdb.checkDuplicatePlayerName(playerName)) {
+                    TextView errorMsg = (TextView) findViewById(R.id.errorMsg);
+                    errorMsg.setText("Deze naam bestaat al.");
+                    error = true;
+                    Log.i(TAG, "duplicate name: true");
+                } else {
+                    // error blijft false
+                    Log.i(TAG, "duplicate name: false");
+                }
 
                 // Als er geen errors zijn gevonden start het spel
-                if (errors == false) {
+                if (error == false) {
                     // Nieuw scherm openen en data meegeven
                     Intent intent = new Intent(v.getContext(), GameActivity.class);
                     intent.putExtra("playerName", playerName);

@@ -6,20 +6,19 @@ package com.example.gebruiker.tictactoe;
 
 public class PlayerModel {
 
+    public String id;
+    public int highscorePos;
     public String name;
-    public String figure;
     public String score;
 
     public PlayerModel() {
 
     }
 
+    public String getId() { return  id; }
+
     public String getName() {
         return name;
-    }
-
-    public String getFigure() {
-        return figure;
     }
 
     public String getScore() { return score; }

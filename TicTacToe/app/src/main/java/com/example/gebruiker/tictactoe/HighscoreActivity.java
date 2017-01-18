@@ -2,6 +2,7 @@ package com.example.gebruiker.tictactoe;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -12,40 +13,31 @@ import java.util.ArrayList;
 
 public class HighscoreActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     private ListView mHighscoreListView;
     private HighscoreAdapter mHighscoreAdapter;
 
     private ArrayList<PlayerModel> highscoreList = new ArrayList<>();
+
+    private PlayerDBHandler pdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscores);
 
-        // Dummy data
-        PlayerModel item = new PlayerModel();
-        item.name = "Koen";
-        item.score = "10";
-        highscoreList.add(item);
+        pdb = new PlayerDBHandler(getApplicationContext());
+        highscoreList = pdb.getHighscoreList();
 
-        item = new PlayerModel();
-        item.name = "Jari";
-        item.score = "20";
-        highscoreList.add(item);
+        Log.i(TAG, "onCreate: " + highscoreList );
 
-        item = new PlayerModel();
-        item.name = "Cliff";
-        item.score = "3";
-        highscoreList.add(item);
+        PlayerModel p = new PlayerModel();
+        p.name = "Koen";
 
-        item = new PlayerModel();
-        item.name = "Daniel";
-        item.score = "99";
-        highscoreList.add(item);
+        pdb.addPlayer(p);
 
-        PlayerDBHandler pdb = new PlayerDBHandler(getApplicationContext(), null, null, 1);
-        pdb.getPersonByName("Koen");
-
+//        Log.i(TAG, "onCreate: "+ pdb.addPlayer(p));
 
 
         mHighscoreListView = (ListView) findViewById(R.id.highscoreListItem);

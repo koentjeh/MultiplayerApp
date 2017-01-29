@@ -100,7 +100,7 @@ public class GameController {
     /**
      * Get the position on Board of clicked button
      */
-    public int[] getPos(Button clickedButton) {
+    public int[] getPos(int button) {
 
         // Return value
         int[] pos = new int[2];
@@ -109,40 +109,49 @@ public class GameController {
         // Clicked column
         int y = 0;
 
-        switch (clickedButton.getId()) {
+        switch (button) {
             case R.id.buttonA1:
+            case 0:
                 x = 0;
                 y = 0;
                 break;
             case R.id.buttonA2:
+            case 1:
                 x = 1;
                 y = 0;
                 break;
             case R.id.buttonA3:
+            case 2:
                 x = 2;
                 y = 0;
                 break;
             case R.id.buttonB1:
+            case 3:
                 x = 0;
                 y = 1;
                 break;
             case R.id.buttonB2:
+            case 4:
                 x = 1;
                 y = 1;
                 break;
             case R.id.buttonB3:
+            case 5:
                 x = 2;
                 y = 1;
                 break;
             case R.id.buttonC1:
+            case 6:
                 x = 0;
                 y = 2;
                 break;
             case R.id.buttonC2:
+            case 7:
                 x = 1;
                 y = 2;
                 break;
             case R.id.buttonC3:
+            case 8:
                 x = 2;
                 y = 2;
                 break;

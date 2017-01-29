@@ -1,4 +1,4 @@
-package com.example.gebruiker.tictactoe;
+package com.example.gebruiker.tictactoe.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.example.gebruiker.tictactoe.HighscoreAdapter;
+import com.example.gebruiker.tictactoe.model.PlayerDBHandler;
+import com.example.gebruiker.tictactoe.model.Player;
+import com.example.gebruiker.tictactoe.R;
 
 import java.util.ArrayList;
 
@@ -21,7 +26,7 @@ public class HighscoreActivity extends AppCompatActivity {
     private ListView mHighscoreListView;
     private HighscoreAdapter mHighscoreAdapter;
 
-    private ArrayList<PlayerModel> highscoreList = new ArrayList<>();
+    private ArrayList<Player> highscoreList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

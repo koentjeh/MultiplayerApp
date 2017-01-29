@@ -1,12 +1,13 @@
 package com.example.gebruiker.tictactoe;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.gebruiker.tictactoe.model.Player;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class HighscoreAdapter extends BaseAdapter {
 
     private ArrayList list;
 
-    public HighscoreAdapter(Context context, LayoutInflater inflater, ArrayList<PlayerModel> list) {
+    public HighscoreAdapter(Context context, LayoutInflater inflater, ArrayList<Player> list) {
         this.context = context;
         this.inflater = inflater;
         this.list = list;
@@ -57,10 +58,10 @@ public class HighscoreAdapter extends BaseAdapter {
         } else
             viewHolder = (ViewHolder) convertView.getTag();
 
-        PlayerModel player = (PlayerModel) list.get(position);
-        viewHolder.playerPositionTextView.setText( Integer.toString(player.highscorePos) + "." );
-        viewHolder.playerNameTextView.setText( player.name );
-        viewHolder.playerScoreTextView.setText( Integer.toString(player.score) );
+        Player player = (Player) list.get(position);
+//        viewHolder.playerPositionTextView.setText( "1." );
+//        viewHolder.playerNameTextView.setText( player.getName() );
+//        viewHolder.playerScoreTextView.setText( Integer.toString( Integer.parseInt(player.getScore()) ) );
 
         return convertView;
     }

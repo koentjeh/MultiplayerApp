@@ -1,4 +1,4 @@
-package com.example.gebruiker.tictactoe;
+package com.example.gebruiker.tictactoe.model;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -61,29 +61,25 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
     // return false = naam beschikbaar
     public Boolean checkDuplicatePlayerName(String name) {
 
-        Boolean error = false;
-        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + DB_TABLE_NAME + " WHERE " + COLOMN_NAME + "=" + "\"" + name + "\"", null);
+        Boolean playerExists = false;
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT name FROM " + DB_TABLE_NAME + " WHERE lower(" + COLOMN_NAME + ")=" + "\"lower(" + name + ")\"", null);
 
-        // Als spelernaam is gevonden
-        if (cursor.moveToFirst()) {
-            Log.i(TAG, "addPlayer: naam bestaat al");
-
-            error = true;
+        if (cursor.getCount() == 0) {
+            Log.i(TAG, "checkDuplicatePlayerName: naam bestaat nog niet");
         } else {
-            Log.i(TAG, "addPlayer: naam bestaat nog niet");
+            playerExists = true;
+            Log.i(TAG, "checkDuplicatePlayerName: naam bestaat al");
         }
+
         cursor.close();
 
-        return error;
+        return playerExists;
     }
 
     // Speler toevoegen aan highscores
-    public void addPlayer(PlayerModel player) {
+    public void addPlayer(Player player) {
 
-        // Alle namen zijn UPPERCASE
-        player.name = player.name.toUpperCase();
-
-        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + DB_TABLE_NAME + " WHERE " + COLOMN_NAME + "=" + "\"" + player.name + "\"", null);
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + DB_TABLE_NAME + " WHERE " + COLOMN_NAME + "=" + "\"" + player.getName() + "\"", null);
 
         // Check of spelernaam is gevonden
         if (cursor.moveToFirst()) {
@@ -93,8 +89,8 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
 
             // Voeg de speler toe
             ContentValues values = new ContentValues();
-            values.put(COLOMN_NAME, player.name);
-            values.put(COLOMN_SCORE, player.score);
+            values.put(COLOMN_NAME, player.getName());
+//            values.put(COLOMN_SCORE, player.getScore());
 
             // Voer query uit
             SQLiteDatabase db = this.getWritableDatabase();
@@ -117,44 +113,70 @@ public class PlayerDBHandler extends SQLiteOpenHelper {
     }
 
     // Lijst met 10 spelers met beste score ophalen
-    public ArrayList<PlayerModel> getHighscoreList() {
+    public ArrayList<Player> getHighscoreList() {
         Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + DB_TABLE_NAME + " ORDER BY " + COLOMN_SCORE + " DESC LIMIT 10", null);
 
-        ArrayList<PlayerModel> playerList = new ArrayList<>();
-        PlayerModel p;
+        ArrayList<Player> playerList = new ArrayList<>();
+        Player p;
         // Begin bij positie 1
         int i = 1;
 
         cursor.moveToFirst();
-        while(!cursor.isAfterLast()) {
 
-            // Speler object aan lijst toevoegen
-            p = new PlayerModel();
-            p.highscorePos = i;
-            p.id = cursor.getString(cursor.getColumnIndex(COLOMN_ID));
-            p.name = cursor.getString(cursor.getColumnIndex(COLOMN_NAME));
-            p.score = cursor.getInt(cursor.getColumnIndex(COLOMN_SCORE));
+        Log.i(TAG, "getHighscoreList: ");
+
+        // Als er een of meerdere spelers zijn gevonden.
+        if (playerList.size() > 0) {
+
+            while (!cursor.isAfterLast()) {
+
+                // Speler object aan lijst toevoegen
+                p = new Player();
+//                p.highscorePos = i;
+//                p.setId(cursor.getInt(cursor.getColumnIndex(COLOMN_ID)));
+                p.setName(cursor.getString(cursor.getColumnIndex(COLOMN_NAME)));
+//                p.setScore(cursor.getInt(cursor.getColumnIndex(COLOMN_SCORE)));
+                playerList.add(p);
+
+                Log.i(TAG, "getHighscorelist: Player at position " + i + "added to list.");
+
+                i++;
+                cursor.moveToNext();
+            }
+
+        } else {
+            p = new Player();
+//            p.highscorePos = 0;
+            p.setName("Nog geen data om te weergeven.");
+//            p.setScore(0);
             playerList.add(p);
 
-            Log.i(TAG, "getHighscorelist: Player at position " + i + "added to list.");
-
-            i++;
-            cursor.moveToNext();
+            Log.i(TAG, "getHighscorelist: Dummydata added");
         }
         cursor.close();
 
-        // Als er geen speler in de database staat geef dummy data mee.
-        if (playerList.size() == 0) {
-            Log.i(TAG, "getHighscoreList: ");
-
-            p = new PlayerModel();
-            p.highscorePos = 0;
-            p.name = "Nog geen data om te weergeven.";
-            p.score = 0;
-            playerList.add(p);
-        }
-
         // Return de lijst met 10 beste spelers
         return playerList;
+    }
+
+    // Speler zoeken met naam
+    // true = staat al in db
+    // false = staat nog niet in db
+    public Boolean checkIfDuplicateName(String name) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DB_TABLE_NAME + " WHERE " + COLOMN_NAME + "=" + "\"" + name + "\"", null);
+        boolean result = false;
+
+        // Als spelernaam is gevonden
+        if (cursor.getCount() > 0) {
+            result = true;
+        }
+
+        cursor.close();
+
+        Log.i(TAG, "getPlayerByName(): Naam gevonden = " + result);
+
+        return result;
     }
 }

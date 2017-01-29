@@ -1,7 +1,9 @@
-package com.example.gebruiker.tictactoe;
+package com.example.gebruiker.tictactoe.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.example.gebruiker.tictactoe.R;
 
 /**
  * Created by Gebruiker on 2017-01-18.

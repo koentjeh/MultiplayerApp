@@ -1,4 +1,4 @@
-package com.example.gebruiker.tictactoe;
+package com.example.gebruiker.tictactoe.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.gebruiker.tictactoe.R;
+import com.example.gebruiker.tictactoe.model.PlayerDBHandler;
+
 /**
  * Created by Gebruiker on 2017-01-17.
  */
@@ -18,8 +21,8 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
 
     private static final String TAG = "PregameActivity";
 
-    private String playerName;
-    private String startFigure;
+    private String name;
+    private String figure;
 
     private Button buttonXPregame;
     private Button buttonOPregame;
@@ -32,9 +35,11 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
 
         // Input voor spelernaam
         final EditText inputPlayerName = (EditText) findViewById(R.id.playerName);
+        // Texveld voor error meldingen
+        final TextView errorMsg = (TextView) findViewById(R.id.errorMsg);
 
         // Standaard beginspeler
-        startFigure = "R";
+        figure = "R";
 
         // Knoppen om beginspeler te kiezen
         buttonXPregame = (Button) findViewById(R.id.xPregame);
@@ -48,43 +53,34 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
         Button buttonStartGame = (Button) findViewById(R.id.startGame);
         buttonStartGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Controle op errors
-                boolean error = false;
 
-                // Naam van speler ophalen uit input
-                playerName = inputPlayerName.getText().toString().toUpperCase();
+            // Naam van speler ophalen uit input
+            name = inputPlayerName.getText().toString();
 
-                // Minimaal lengte naam = 4 anders error melding
-                if (playerName.length() < 4) {
-                    TextView errorMsg = (TextView) findViewById(R.id.errorMsg);
-                    errorMsg.setText("Naam moet uit minimaal 4 karakters bestaan.");
-                    error = true;
-                    Log.i(TAG, "name length: min 4");
-                }
+            // Speler database
+            PlayerDBHandler pdb = new PlayerDBHandler(getApplicationContext());
 
-                // Controleer op dubbele namen
-                // Speler database
-                PlayerDBHandler pdb = new PlayerDBHandler(getApplicationContext());
+            // Minimale lengte van naam is 4
+            if ( name.length() < 4 ) {
 
-                // true = dubbele naam geef melding
-                if (pdb.checkDuplicatePlayerName(playerName)) {
-                    TextView errorMsg = (TextView) findViewById(R.id.errorMsg);
-                    errorMsg.setText("Deze naam bestaat al.");
-                    error = true;
-                    Log.i(TAG, "duplicate name: true");
-                } else {
-                    // error blijft false
-                    Log.i(TAG, "duplicate name: false");
-                }
+                errorMsg.setText("Naam moet uit minimaal 4 karakters bestaan.");
+                Log.i(TAG, "name length: min 4");
 
-                // Als er geen errors zijn gevonden start het spel
-                if (error == false) {
-                    // Nieuw scherm openen en data meegeven
-                    Intent intent = new Intent(v.getContext(), GameActivity.class);
-                    intent.putExtra("playerName", playerName);
-                    intent.putExtra("startFigure", startFigure);
-                    startActivity(intent);
-                }
+            // Controleert op dubbele naam
+            } else if ( pdb.checkDuplicatePlayerName(name) ) {
+
+                errorMsg.setText("Deze naam bestaat al.");
+                Log.i(TAG, "duplicate name: true");
+
+            // Als er geen errors zijn gevonden start het spel
+            } else {
+
+                // Nieuw scherm openen en data meegeven
+                Intent intent = new Intent(getBaseContext(), GameActivity.class);
+                intent.putExtra("playername", name);
+                intent.putExtra("startFigure", figure);
+                startActivity(intent);
+            }
             }
         });
     }
@@ -96,7 +92,7 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
         if (view.getId() == R.id.xPregame) {
             Log.i(TAG, "onClick: set starting player: X");
             // Kruisje begint
-            startFigure = "X";
+            figure = "X";
             // knop actief
             buttonXPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.accent));
         } else {
@@ -108,7 +104,7 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
         if (view.getId() == R.id.oPregame) {
             Log.i(TAG, "onClick: set starting player: O");
             // Rondje begint
-            startFigure = "O";
+            figure = "O";
             // knop actief
             buttonOPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.accent));
         } else {
@@ -120,7 +116,7 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
         if (view.getId() == R.id.randomPregame) {
             Log.i(TAG, "onClick: set starting player: R");
             // Kruisje of rondje begint (Willekeurig)
-            startFigure = "R";
+            figure = "R";
             // knop actief
             buttonRandomPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.accent));
         } else {

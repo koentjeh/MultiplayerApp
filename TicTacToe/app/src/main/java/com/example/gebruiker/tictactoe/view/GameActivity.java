@@ -27,7 +27,7 @@ public class GameActivity extends AppCompatActivity {
     private final GameController game = new GameController();
 
     private Button a1, a2, a3, b1, b2, b3, c1, c2, c3;
-    private Button[] buttonArray;
+    private Button[] boardTiles;
 
     private Button buttonNextGame;
 
@@ -56,7 +56,6 @@ public class GameActivity extends AppCompatActivity {
         textViewName = (TextView) findViewById(R.id.textViewPlayerName);
         textViewName.setText( game.getPlayerName() );
 
-        ArrayList boardTiles = new ArrayList();
         a1 = (Button) findViewById(R.id.buttonA1);
         a2 = (Button) findViewById(R.id.buttonA2);
         a3 = (Button) findViewById(R.id.buttonA3);
@@ -68,13 +67,14 @@ public class GameActivity extends AppCompatActivity {
         c3 = (Button) findViewById(R.id.buttonC3);
 
         // Insert all buttons into the array.
-        buttonArray = new Button[]{a1, a2, a3, b1, b2, b3, c1, c2, c3};
+        boardTiles = new Button[]{a1, a2, a3, b1, b2, b3, c1, c2, c3};
+
 
         game.startTurn(intent.getStringExtra("startFigure"));
-//        game.checkTurn();
 
         // Set the click listener for each button.
-        for(Button button : buttonArray) {
+        for (Button button : boardTiles) {
+
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -85,7 +85,9 @@ public class GameActivity extends AppCompatActivity {
                     // Aangeklikte tegel wijzigen
                     game.setTile(clickedButton);
 
-                    game.checkWinner(game.getPos(clickedButton));
+
+
+                    game.checkWinner(game.getPos(clickedButton.getId()));
 
 //                    game.computerTurn();
 //
@@ -95,6 +97,13 @@ public class GameActivity extends AppCompatActivity {
                 }
             });
         }
+
+
+//        game.checkTurn();
+
+
+
+
 
 
 

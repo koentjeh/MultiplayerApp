@@ -30,10 +30,6 @@ public class Board {
         }
     }
 
-    public void setTile(String turn, int x, int y) {
-        board[x][y] = turn;
-    }
-
     public boolean checkForWinningMove(String turn, int x, int y) {
 
         boolean winner = false;
@@ -80,5 +76,9 @@ public class Board {
         }
 
         return winner;
+    }
+
+    public void setTile(String turn, int x, int y) {
+        board[x][y] = turn;
     }
 }

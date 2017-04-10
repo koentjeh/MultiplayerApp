@@ -1,5 +1,7 @@
 package com.example.gebruiker.tictactoe.controller;
 
+import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.widget.Button;
 
@@ -16,7 +18,7 @@ import java.util.Random;
  * Created by Gebruiker on 2017-01-19.
  */
 
-public class GameController {
+public class GameController extends Activity {
 
     private static final String TAG = "GameController";
 
@@ -60,7 +62,7 @@ public class GameController {
         Log.i(TAG, "Beginspeler: " + turn);
 
         if (turn.equals("O")) {
-            computerTurn();
+//            computerTurn();
         }
 
         this.turn = turn;
@@ -99,8 +101,9 @@ public class GameController {
 
     /**
      * Get the position on Board of clicked button
+     * @param button
      */
-    public int[] getPos(int button) {
+    public int[] getPos(Button button) {
 
         // Return value
         int[] pos = new int[2];
@@ -109,49 +112,40 @@ public class GameController {
         // Clicked column
         int y = 0;
 
-        switch (button) {
+        switch (button.getId()) {
             case R.id.buttonA1:
-            case 0:
                 x = 0;
                 y = 0;
                 break;
             case R.id.buttonA2:
-            case 1:
                 x = 1;
                 y = 0;
                 break;
             case R.id.buttonA3:
-            case 2:
                 x = 2;
                 y = 0;
                 break;
             case R.id.buttonB1:
-            case 3:
                 x = 0;
                 y = 1;
                 break;
             case R.id.buttonB2:
-            case 4:
                 x = 1;
                 y = 1;
                 break;
             case R.id.buttonB3:
-            case 5:
                 x = 2;
                 y = 1;
                 break;
             case R.id.buttonC1:
-            case 6:
                 x = 0;
                 y = 2;
                 break;
             case R.id.buttonC2:
-            case 7:
                 x = 1;
                 y = 2;
                 break;
             case R.id.buttonC3:
-            case 8:
                 x = 2;
                 y = 2;
                 break;
@@ -187,7 +181,7 @@ public class GameController {
             endGame("lost");
 
         // It's a tie
-        } else if (turnCount > = 9) {
+        } else if (turnCount >= 9) {
 
             endGame("tie");
 

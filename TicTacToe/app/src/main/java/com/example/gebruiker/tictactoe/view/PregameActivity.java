@@ -17,7 +17,7 @@ import com.example.gebruiker.tictactoe.model.PlayerDBHandler;
  * Created by Gebruiker on 2017-01-17.
  */
 
-public class PregameActivity extends AppCompatActivity implements View.OnClickListener {
+public class PregameActivity extends AppCompatActivity {
 
     private static final String TAG = "PregameActivity";
 
@@ -39,16 +39,7 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
         final TextView errorMsg = (TextView) findViewById(R.id.errorMsg);
 
         // Standaard beginspeler
-        figure = "R";
-
-        // Knoppen om beginspeler te kiezen
-        buttonXPregame = (Button) findViewById(R.id.xPregame);
-        buttonOPregame = (Button) findViewById(R.id.oPregame);
-        buttonRandomPregame = (Button) findViewById(R.id.randomPregame);
-
-        buttonXPregame.setOnClickListener(this);
-        buttonOPregame.setOnClickListener(this);
-        buttonRandomPregame.setOnClickListener(this);
+        figure = "O";
 
         Button buttonStartGame = (Button) findViewById(R.id.startGame);
         buttonStartGame.setOnClickListener(new View.OnClickListener() {
@@ -83,45 +74,5 @@ public class PregameActivity extends AppCompatActivity implements View.OnClickLi
             }
             }
         });
-    }
-
-    @Override
-    public void onClick(View view) {
-        
-        // Als knop is ingedrukt zet actief anders inactief
-        if (view.getId() == R.id.xPregame) {
-            Log.i(TAG, "onClick: set starting player: X");
-            // Kruisje begint
-            figure = "X";
-            // knop actief
-            buttonXPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.accent));
-        } else {
-            // knop inactief
-            buttonXPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.primary_light));
-        }
-
-        // Als knop is ingedrukt zet actief anders inactief
-        if (view.getId() == R.id.oPregame) {
-            Log.i(TAG, "onClick: set starting player: O");
-            // Rondje begint
-            figure = "O";
-            // knop actief
-            buttonOPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.accent));
-        } else {
-            // knop inactief
-            buttonOPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.primary_light));
-        }
-
-        // Als knop is ingedrukt zet actief anders inactief
-        if (view.getId() == R.id.randomPregame) {
-            Log.i(TAG, "onClick: set starting player: R");
-            // Kruisje of rondje begint (Willekeurig)
-            figure = "R";
-            // knop actief
-            buttonRandomPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.accent));
-        } else {
-            // knop inactief
-            buttonRandomPregame.setBackgroundColor(ContextCompat.getColor(getBaseContext(), R.color.primary_light));
-        }
     }
 }

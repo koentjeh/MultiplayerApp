@@ -87,7 +87,7 @@ public class GameActivity extends AppCompatActivity {
 
 
 
-                    game.checkWinner(game.getPos(clickedButton));
+                    game.checkWinner(game.getPos(clickedButton.getId()));
 
 //                    game.computerTurn();
 //
